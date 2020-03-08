@@ -4,10 +4,6 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- 
-    Experimenting with maven for the nightly build.
-  -->
-
   <groupId>org.argouml</groupId>
   <artifactId>testmodels</artifactId>
   <version>0.35.2-SNAPSHOT</version>
@@ -21,6 +17,46 @@
         </includes>
       </resource>
     </resources>
+    <plugins>
+      <!-- This cannot depend on parentpom since it is built "before". -->
+      <!-- These needs to be restated in the same way as in parentpom. -->
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+        <configuration>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!-- Deploy the web site -->
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.12</version>
+        <configuration>
+          <server>github</server>
+          <repositoryOwner>argouml-tigris-org</repositoryOwner>
+          <repositoryName>${project.artifactId}</repositoryName>
+
+          <!-- The commit message -->
+          <message>Building site for ${project.name} ${project.version}
+
+          ${project.artifactId} ${site.path}
+          </message>
+          <!-- The location where the site is uploaded -->
+          <path>${site.path}</path>
+          <merge>true</merge>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site-deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
   </build>
 
   <name>testmodels</name>
