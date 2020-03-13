@@ -8,6 +8,13 @@
   <artifactId>testmodels</artifactId>
   <version>0.35.2-SNAPSHOT</version>
 
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+    <relativePath/>
+  </parent>
+
   <build>
     <resources>
       <resource>
