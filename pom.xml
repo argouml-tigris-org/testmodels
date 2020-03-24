@@ -70,4 +70,20 @@
   <description>
 Packaging of the tested models to allow reuse of them also when using git+maven.
   </description>
+
+  <properties>
+    <github.site.repositoryName>${project.artifactId}</github.site.repositoryName>
+  </properties>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/argouml-tigris-org/${github.site.repositoryName}/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/argouml-tigris-org/${github.site.repositoryName}</url>
+    <connection>scm:git:https://github.com/argouml-tigris-org/${github.site.repositoryName}.git</connection>
+    <developerConnection>scm:git:ssh://review.gerrithub.io:29418/argouml-tigris-org/${github.site.repositoryName}.git</developerConnection>
+  </scm>
+
 </project>
