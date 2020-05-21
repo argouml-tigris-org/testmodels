@@ -41,6 +41,10 @@
         <configuration>
           <serverId>github</serverId>
           <pubScmUrl>scm:git:${project.scm.url}</pubScmUrl>
+          <!-- There is a problem in jgit in that it can't delete files.
+               See https://issues.apache.org/jira/browse/SCM-925
+           -->
+          <skipDeletedFiles>true</skipDeletedFiles>
           <scmBranch>gh-pages</scmBranch>
           <providerImplementations>
 	    <git>jgit</git>
@@ -77,6 +81,9 @@ Packaging of the tested models to allow reuse of them also when using git+maven.
 
   <properties>
     <github.site.repositoryName>${project.artifactId}</github.site.repositoryName>
+    <github.site.org>https://github.com/argouml-tigris-org</github.site.org>
+    <gerrithub.site.org.ssh>ssh://review.gerrithub.io:29418/argouml-tigris-org</gerrithub.site.org.ssh>
+    <github.site.pages>https://argouml-tigris-org.github.io</github.site.pages>
   </properties>
 
   <issueManagement>
@@ -85,9 +92,16 @@ Packaging of the tested models to allow reuse of them also when using git+maven.
   </issueManagement>
 
   <scm>
-    <url>https://github.com/argouml-tigris-org/${github.site.repositoryName}</url>
-    <connection>scm:git:https://github.com/argouml-tigris-org/${github.site.repositoryName}.git</connection>
-    <developerConnection>scm:git:ssh://review.gerrithub.io:29418/argouml-tigris-org/${github.site.repositoryName}.git</developerConnection>
+    <url>${github.site.org}/${github.site.repositoryName}</url>
+    <connection>scm:git:${github.site.org}/${github.site.repositoryName}.git</connection>
+    <developerConnection>scm:git:${gerrithub.site.org.ssh}/${github.site.repositoryName}.git</developerConnection>
   </scm>
+
+  <distributionManagement>
+    <site>
+        <id>site-docs</id>
+        <url>${github.site.pages}/${github.site.repositoryName}</url>
+    </site>
+  </distributionManagement>
 
 </project>
